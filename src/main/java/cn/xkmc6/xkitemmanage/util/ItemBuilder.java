@@ -4,8 +4,9 @@ import com.cryptomorin.xseries.SkullUtils;
 import com.cryptomorin.xseries.XMaterial;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import de.tr7zw.changeme.nbtapi.NBTCompound;
 import de.tr7zw.changeme.nbtapi.NBTItem;
+import lombok.Getter;
+import lombok.Setter;
 import org.bukkit.Color;
 import org.bukkit.Material;
 import org.bukkit.block.banner.Pattern;
@@ -41,22 +42,49 @@ public class ItemBuilder {
         }
     }
 
+
+    @Getter
     private Material material;
+    @Getter
+    @Setter
     private int amount;
+    @Getter
+    @Setter
     private short damage;
+    @Getter
+    @Setter
     private String name;
+    @Getter
     private final List<String> lore;
+    @Getter
     private final List<ItemFlag> flags;
+    @Getter
     private final Map<Enchantment, Integer> enchants;
+    @Getter
     private final List<Pattern> patterns;
+    @Getter
+    @Setter
     private Color color;
+    @Getter
     private final List<PotionEffect> potions;
+    @Getter
+    @Setter
     private PotionData potionData;
+    @Getter
+    @Setter
     private EntityType spawnType;
+    @Getter
+    @Setter
     private String skullOwner;
+    @Getter
+    @Setter
     private SkullTexture skullTexture;
+    @Getter
+    @Setter
     private boolean isUnbreakable;
+    @Getter
     private final int customModelData;
+    @Getter
     private final ItemMeta originMeta;
 
     private ItemBuilder(Builder builder) {
@@ -79,14 +107,6 @@ public class ItemBuilder {
         originMeta = builder.originMeta;
     }
 
-    public Material getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(Material material) {
-        this.material = material;
-    }
-
     public void setMaterial(XMaterial material) {
         this.material = material.parseMaterial();
         if (this.material == null) {
@@ -94,96 +114,8 @@ public class ItemBuilder {
         }
     }
 
-    public int getAmount() {
-        return amount;
-    }
-
-    public void setAmount(int amount) {
-        this.amount = amount;
-    }
-
-    public float getDamage() {
-        return damage;
-    }
-
-    public void setDamage(short damage) {
-        this.damage = damage;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<String> getLore() {
-        return lore;
-    }
-
-    public List<ItemFlag> getFlags() {
-        return flags;
-    }
-
-    public Map<Enchantment, Integer> getEnchants() {
-        return enchants;
-    }
-
-    public List<Pattern> getPatterns() {
-        return patterns;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
-    public List<PotionEffect> getPotions() {
-        return potions;
-    }
-
-    public PotionData getPotionData() {
-        return potionData;
-    }
-
-    public void setPotionData(PotionData potionData) {
-        this.potionData = potionData;
-    }
-
-    public EntityType getSpawnType() {
-        return spawnType;
-    }
-
-    public void setSpawnType(EntityType spawnType) {
-        this.spawnType = spawnType;
-    }
-
-    public String getSkullOwner() {
-        return skullOwner;
-    }
-
-    public void setSkullOwner(String skullOwner) {
-        this.skullOwner = skullOwner;
-    }
-
-    public SkullTexture getSkullTexture() {
-        return skullTexture;
-    }
-
-    public void setSkullTexture(SkullTexture skullTexture) {
-        this.skullTexture = skullTexture;
-    }
-
-    public boolean isUnbreakable() {
-        return isUnbreakable;
-    }
-
-    public void setUnbreakable(boolean unbreakable) {
-        isUnbreakable = unbreakable;
+    public void setMaterial(Material material) {
+        this.material = material;
     }
 
     public void hideAll() {
@@ -281,6 +213,7 @@ public class ItemBuilder {
         private short damage = 0;
         private String name = null;
         private final List<String> lore = new ArrayList<>();
+
         private final List<ItemFlag> flags = new ArrayList<>();
         private final Map<Enchantment, Integer> enchants = new HashMap<>();
         private final List<Pattern> patterns = new ArrayList<>();
@@ -376,6 +309,31 @@ public class ItemBuilder {
 
         public Builder name(String val) {
             name = val;
+            return this;
+        }
+
+        public Builder lore(String... val) {
+            lore.addAll(Arrays.asList(val));
+            return this;
+        }
+
+        public Builder flag(ItemFlag... flag) {
+            flags.addAll(Arrays.asList(flag));
+            return this;
+        }
+
+        public Builder enchant(Map<Enchantment, Integer> enchant) {
+            enchants.putAll(enchant);
+            return this;
+        }
+
+        public Builder pattern(Pattern... pattern){
+            patterns.addAll(Arrays.asList(pattern));
+            return this;
+        }
+
+        public Builder potion(PotionEffect... potion){
+            potions.addAll(Arrays.asList(potion));
             return this;
         }
 
