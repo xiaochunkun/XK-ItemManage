@@ -1,0 +1,76 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '7.1.2'
+}
+
+group = 'cn.xkmc6.xkitemmanage'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven { url = "https://xkmc6.cn/repository/" }
+    maven { url = "https://repo.codemc.org/repository/maven-public/" }
+    maven { url = "https://repo.aikar.co/content/groups/aikar/" }
+    maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
+}
+
+configurations {
+    // give tests access to annotationProcessor dependencies
+    testImplementation.extendsFrom annotationProcessor
+}
+
+dependencies {
+    implementation 'org.jetbrains:annotations:20.1.0'
+    compileOnly(fileTree("libs"))
+    compileOnly("org.projectlombok:lombok:1.18.22")
+    compileOnly("org.bukkit:bukkit:1.16.5-R0.1-SNAPSHOT")
+    compileOnly("com.mojang:authlib:3.2.38")
+
+    implementation("com.github.cryptomorin:XSeries:8.6.1")
+    implementation("de.tr7zw:item-nbt-api:2.9.1")
+    implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
+    implementation("systems.manifold:manifold-ext-rt:2022.1.5")
+
+    annotationProcessor(group: 'systems.manifold', name: 'manifold-ext', version: '2022.1.5')
+    annotationProcessor("org.projectlombok:lombok:1.18.22")
+}
+
+
+def targetJavaVersion = 8
+java {
+    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
+    sourceCompatibility = javaVersion
+    targetCompatibility = javaVersion
+    if (JavaVersion.current() < javaVersion) {
+        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
+        options.release = targetJavaVersion
+    }
+}
+
+processResources {
+    def props = [version: version]
+    inputs.properties props
+    filteringCharset 'UTF-8'
+    filesMatching('plugin.yml') {
+        expand props
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+shadowJar {
+    relocate('de.tr7zw.changeme.nbtapi', 'cn.xkmc6.xkitemmanage.libs.nbtapi')
+    relocate('com.cryptomorin.xseries', 'cn.xkmc6.xkitemmanage.libs.xseries')
+    relocate('co.aikar.commands', 'cn.xkmc6.xkitemmanage.libs.acf')
+    relocate('co.aikar.locales', 'cn.xkmc6.xkitemmanage.lib.locales')
+    exclude("LICENSE")
+    exclude("META-INF/**")
+    minimize()
+}

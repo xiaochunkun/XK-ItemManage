@@ -1,0 +1,42 @@
+default:
+  # 物品的display文件夹的节点
+  display: 'DISPLAY_ITEM'
+  # 物品的类型
+  material: 'GOLDEN_SWORD'
+  # 与display里的name对应
+  name:
+    NAME: '&e默认装备'
+  lore:
+    TYPE: '&e装备'
+    LORE:
+      - '&e这是一个默认装备'
+      - '&e虽然这并没有什么卵用'
+  meta:
+    # 属性
+    attribute:
+      # 属性位置（Slot）
+      mainhand:
+        # 属性名称（Name）
+        health: 100
+    # 附魔
+    enchantment:
+      DAMAGE_ALL: 1
+    # 隐藏flag
+    itemflag:
+      - HIDE_ENCHANTS
+    # 无限耐久
+    unbreakable: true
+    # 药水
+    potion:
+      slow: '60 2'
+    # 头颅
+    skull:
+      # 拥有者（最简单的头颅皮肤添加方式）
+      owner: 'xiaokun'
+      # 材质
+      textures:
+        id: '54a22596-5138-4359-9835-efbe51ae4726'
+        value: 'eyJ0ZXh0dXJlcyI6eyJTS0lOIjp7InVybCI6Imh0dHA6Ly90ZXh0dXJlcy5taW5lY3JhZnQubmV0L3RleHR1cmUvMTBhNmNjNDA0MjRlN2YwZDhhZDRlYWI5YjdlZTJhZTY5N2Y3YWM2M2MxMjlhZTExM2I1NGRlMDFhMWJjYTU3YyJ9fX0='
+  # nbt
+  data:
+    item: '在NBT里面瞎放内容'
