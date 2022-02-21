@@ -10,9 +10,16 @@ import org.bukkit.configuration.ConfigurationSection;
 public abstract class Meta {
     @Getter
     private final ConfigurationSection root;
+    @Getter
+    private String id;
 
     public Meta(ConfigurationSection root) {
         this.root = root;
+        if (this.getClass().isAssignableFrom(MetaKey.class)){
+            this.id = this.getClass().getAnnotation(MetaKey.class).key();
+        }else {
+            this.id = this.getClass().getName();
+        }
     }
 
 }
