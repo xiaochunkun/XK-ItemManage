@@ -3,7 +3,6 @@ package cn.xkmc6.xkitemmanage.util;
 import com.cryptomorin.xseries.SkullUtils;
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.properties.Property;
-import com.sun.istack.internal.NotNull;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.SkullMeta;
 
@@ -12,7 +11,7 @@ import org.bukkit.inventory.meta.SkullMeta;
  * @date 2022/02/20 15:21
  */
 public class XSkull extends SkullUtils {
-    public static ItemBuilder.SkullTexture getSkin(@NotNull ItemMeta skull) {
+    public static ItemBuilder.SkullTexture getSkin(ItemMeta skull) {
         SkullMeta meta = (SkullMeta) skull;
         GameProfile profile = null;
 

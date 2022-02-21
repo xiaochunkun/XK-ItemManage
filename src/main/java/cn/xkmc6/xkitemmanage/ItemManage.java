@@ -7,8 +7,12 @@ import co.aikar.commands.BukkitCommandManager;
 import co.aikar.commands.PaperCommandManager;
 import lombok.Getter;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.bukkit.plugin.java.JavaPluginLoader;
+import org.bukkit.scheduler.BukkitRunnable;
 
+import java.io.File;
 import java.util.Locale;
 
 /**
@@ -20,17 +24,17 @@ public final class ItemManage extends JavaPlugin {
     @Getter
     private static ItemManage instance;
 
-    private String version;
-
     @Getter
     PaperCommandManager commandManager;
 
+    private ItemManage(JavaPluginLoader loader, PluginDescriptionFile descriptionFile, File dataFolder, File file) {
+        super(loader, descriptionFile, dataFolder, file);
+    }
 
     @Override
     public void onEnable() {
         // Plugin startup logic
         instance = this;
-        version = Bukkit.getServer().getClass().getPackage().getName().split("\\.")[3];
         commandManager = new PaperCommandManager(this);
         commandManager.registerCommand(new CommandHandler());
         commandManager.getLocales().setDefaultLocale(Locale.CHINA);
@@ -46,24 +50,22 @@ public final class ItemManage extends JavaPlugin {
         unRegisterCommand();
     }
 
-    public Class getNmsClass(String name) throws ClassNotFoundException {
-        return Class.forName("net.minecraft.server." + version + "." + name);
+    private void registerLoadConfig() {
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                new Config().loadConfig();
+                new ItemConfig().loadConfig();
+                this.cancel();
+            }
+        }.runTask(this);
     }
 
-    public Class getCbClass(String name) throws ClassNotFoundException {
-        return Class.forName("org.bukkit.craftbukkit." + version + "." + name);
-    }
-
-    private void registerLoadConfig(){
-        new Config().loadConfig();
-        new ItemConfig().loadConfig();
-    }
-
-    private void registerListener(){
+    private void registerListener() {
 
     }
 
-    private void unRegisterCommand(){
+    private void unRegisterCommand() {
         commandManager.unregisterCommands();
     }
 

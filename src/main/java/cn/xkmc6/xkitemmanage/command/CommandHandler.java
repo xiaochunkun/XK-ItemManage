@@ -33,7 +33,7 @@ public class CommandHandler extends BaseCommand {
     @Syntax("<文件名> <节点>")
     public void save(CommandSender sender, String[] msg) {
         if (msg.length == 1) {
-            File file = new File(ItemManage.instance.getDataFolder(), "item" + File.separator + msg[0]);
+            File file = new File(ItemManage.getInstance().getDataFolder(), "item" + File.separator + msg[0]);
             
         }
     }

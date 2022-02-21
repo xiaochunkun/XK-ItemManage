@@ -40,3 +40,10 @@ default:
   # nbt
   data:
     item: '在NBT里面瞎放内容'
+    xkitem:
+      first:
+        second:
+          third: "我就想NBT在这下面，怎么着？"
+          fourth: 123
+  # 类型
+  type: 'item'
