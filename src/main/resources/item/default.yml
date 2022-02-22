@@ -12,6 +12,13 @@ default:
       - '&e这是一个默认装备'
       - '&e虽然这并没有什么卵用'
   meta:
+    # 属性
+    attribute:
+      mainhand:
+        health: 100
+        damage: -0.9
+      all:
+        health: 100
     # 附魔
     enchantment:
       DAMAGE_ALL: 1

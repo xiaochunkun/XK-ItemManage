@@ -11,7 +11,7 @@ public abstract class Meta {
     @Getter
     private final ConfigurationSection root;
     @Getter
-    private String id;
+    private final String id;
 
     public Meta(ConfigurationSection root) {
         this.root = root;

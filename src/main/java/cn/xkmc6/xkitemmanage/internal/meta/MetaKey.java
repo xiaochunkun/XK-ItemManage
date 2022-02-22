@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
  * @author 小坤
  * @date 2022/02/21 12:34
  */
-@Target(value= {ElementType.FIELD})
+@Target(value = {ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
 public @interface MetaKey {
     public String key() default "";
