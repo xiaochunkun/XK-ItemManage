@@ -38,6 +38,8 @@ dependencies {
 
     testCompileOnly("junit:junit:4.13.2")
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:5.8.2")
+    testCompileOnly("org.jetbrains:annotations:22.0.0")
+    testCompileOnly(fileTree("libs"))
 }
 
 def targetJavaVersion = 8

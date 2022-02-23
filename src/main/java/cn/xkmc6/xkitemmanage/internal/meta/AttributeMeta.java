@@ -64,6 +64,14 @@ public class AttributeMeta extends Meta {
         return nbtItem.getItem();
     }
 
+    public ItemStack remove(ItemStack itemStack){
+        NBTItem nbtItem = new NBTItem(itemStack);
+        if (nbtItem.hasKey("AttributeModifiers")){
+            nbtItem.removeKey("AttributeModifiers");
+        }
+        return nbtItem.getItem();
+    }
+
     public enum Attributes {
         /**
          * 从上倒下 攻击力 攻速 最大生命 移动速度 击退距离 护甲 护甲韧性 AI追踪距离 幸运
