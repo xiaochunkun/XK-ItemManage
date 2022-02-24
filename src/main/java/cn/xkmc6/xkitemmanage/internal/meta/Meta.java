@@ -2,6 +2,7 @@ package cn.xkmc6.xkitemmanage.internal.meta;
 
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.inventory.ItemStack;
 
 /**
  * @author 小坤
@@ -22,4 +23,11 @@ public abstract class Meta {
         }
     }
 
+    public ItemStack build(ItemStack itemStack){
+        return itemStack;
+    }
+
+    public ItemStack drop(ItemStack itemStack){
+        return itemStack;
+    }
 }

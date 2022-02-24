@@ -29,7 +29,11 @@ default:
     unbreakable: true
     # 药水
     potion:
-      slow: '60 2'
+      # 基础效果（由小写 base 命名）
+      base: 'water'
+      # 自定义效果（效果名称：时间(tick)-等级）
+      slow: '60-1'
+      slow_digging: '60-1'
     # 头颅
     skull:
       # 拥有者（最简单的头颅皮肤添加方式）

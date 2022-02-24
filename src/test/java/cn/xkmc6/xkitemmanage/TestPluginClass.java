@@ -39,7 +39,8 @@ public class TestPluginClass {
     @Test
     @DisplayName("Verify that we are in a UNIT_TEST environment")
     void verifyTestEnvironment() {
-        System.out.println("HIDE_ENCHANTS".asItemFlag());
+        System.out.println("A".asPotionEffectType() == null);
+        System.out.println("A".asInt());
     }
 
 

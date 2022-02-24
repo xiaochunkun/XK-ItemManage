@@ -1,6 +1,6 @@
 package cn.xkmc6.xkitemmanage.libs.extensions.java.lang.Integer;
 
-import cn.xkmc6.xkitemmanage.internal.meta.AttributeMeta;
+import cn.xkmc6.xkitemmanage.internal.meta.MetaAttribute;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
 
@@ -10,7 +10,7 @@ import manifold.ext.rt.api.This;
  */
 @Extension
 public class IntegerExtension {
-    public static AttributeMeta.Slot asSlot(@This Integer key){
-        return AttributeMeta.Slot.asSlot(key);
+    public static MetaAttribute.Slot asSlot(@This Integer key){
+        return MetaAttribute.Slot.asSlot(key);
     }
 }

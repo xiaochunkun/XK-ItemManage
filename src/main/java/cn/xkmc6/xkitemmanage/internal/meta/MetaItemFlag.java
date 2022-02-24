@@ -13,18 +13,21 @@ import java.util.List;
  * @date 2022/02/23 13:13
  */
 @MetaKey(key = "itemflag")
-public class ItemFlagMeta extends Meta{
+public class MetaItemFlag extends Meta{
 
     private final List<ItemFlag> flags = new ArrayList<>();
 
-    public ItemFlagMeta(ConfigurationSection root) {
+    public MetaItemFlag(ConfigurationSection root) {
         super(root);
         flags.clear();
-        root.getKeys(false).forEach(key -> {
+        ConfigurationSection rootSection = root.getConfigurationSection("meta.itemflag");
+        if (rootSection == null) return;
+        rootSection.getKeys(false).forEach(key -> {
             if (key.asItemFlag() != null) flags.add(key.asItemFlag());
         });
     }
 
+    @Override
     public ItemStack build(ItemStack itemStack){
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) return itemStack;
@@ -33,6 +36,7 @@ public class ItemFlagMeta extends Meta{
         return itemStack;
     }
 
+    @Override
     public ItemStack drop(ItemStack itemStack){
         ItemMeta meta = itemStack.getItemMeta();
         if (meta == null) return itemStack;

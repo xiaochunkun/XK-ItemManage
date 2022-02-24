@@ -2,15 +2,12 @@ package cn.xkmc6.xkitemmanage.internal.meta;
 
 import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTItem;
-import de.tr7zw.changeme.nbtapi.NBTList;
 import de.tr7zw.changeme.nbtapi.NBTListCompound;
-import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.NumberConversions;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
@@ -20,14 +17,16 @@ import java.util.UUID;
  * @date 2022/02/06 13:11
  */
 @MetaKey(key = "attribute")
-public class AttributeMeta extends Meta {
+public class MetaAttribute extends Meta {
 
     private final Map<Slot, Map<Attributes, Object>> attribute = new HashMap<>();
 
-    public AttributeMeta(ConfigurationSection root) {
+    public MetaAttribute(ConfigurationSection root) {
         super(root);
         attribute.clear();
-        root.getKeys(false).forEach(slot -> {
+        ConfigurationSection rootSection = root.getConfigurationSection("meta.attribute");
+        if (rootSection == null) return;
+        rootSection.getKeys(false).forEach(slot -> {
             ConfigurationSection section = root.getConfigurationSection(slot);
             if (section == null) return;
             Map<Attributes, Object> map = new HashMap<>();
@@ -38,6 +37,7 @@ public class AttributeMeta extends Meta {
         });
     }
 
+    @Override
     public ItemStack build(ItemStack itemStack) {
         NBTItem nbtItem = new NBTItem(itemStack);
         NBTCompoundList attList = nbtItem.getCompoundList("AttributeModifiers");
@@ -64,9 +64,10 @@ public class AttributeMeta extends Meta {
         return nbtItem.getItem();
     }
 
-    public ItemStack remove(ItemStack itemStack){
+    @Override
+    public ItemStack drop(ItemStack itemStack) {
         NBTItem nbtItem = new NBTItem(itemStack);
-        if (nbtItem.hasKey("AttributeModifiers")){
+        if (nbtItem.hasKey("AttributeModifiers")) {
             nbtItem.removeKey("AttributeModifiers");
         }
         return nbtItem.getItem();
