@@ -11,10 +11,14 @@ import org.bukkit.craftbukkit.v1_16_R3.CraftServer;
 import org.bukkit.craftbukkit.v1_16_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemFlag;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.io.File;
+import java.util.jar.JarFile;
 
 /**
  * @author 小坤
@@ -39,8 +43,7 @@ public class TestPluginClass {
     @Test
     @DisplayName("Verify that we are in a UNIT_TEST environment")
     void verifyTestEnvironment() {
-        System.out.println("A".asPotionEffectType() == null);
-        System.out.println("A".asInt());
+        ItemManage.get();
     }
 
 

@@ -8,10 +8,19 @@ import lombok.Getter;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.plugin.java.JavaPluginLoader;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 /**
  * @author 小坤
@@ -47,6 +56,7 @@ public final class ItemManage extends JavaPlugin {
         itemConfig = new ItemConfig();
         registerListener();
         registerLoadConfig();
+
     }
 
     @Override
@@ -68,4 +78,27 @@ public final class ItemManage extends JavaPlugin {
         commandManager.unregisterCommands();
     }
 
+    public static void get() {
+        try {
+            Method method = JavaPlugin.class.getDeclaredMethod("getFile");
+            method.setAccessible(true);
+            File file = (File) method.invoke(ItemManage.getInstance());
+            JarFile jarFile = new JarFile(file);
+            Enumeration<JarEntry> en = jarFile.entries();
+            Map<String, JarEntry> jarMap = new HashMap<>();
+            while (en.hasMoreElements()) {
+                JarEntry jarEntry = en.nextElement();
+                String name = jarEntry.getName();
+                if (name.endsWith(".class")) {
+                    String className = name.replace(".class", "").replace(".", "/");
+                    jarMap.put(className, jarEntry);
+                    System.out.println(className + "---" + jarEntry.getName());
+                }
+            }
+        }catch (ReflectiveOperationException e){
+            throw new RuntimeException("Find error",e);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }
