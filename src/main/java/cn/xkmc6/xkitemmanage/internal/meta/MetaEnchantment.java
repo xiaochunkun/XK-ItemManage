@@ -11,14 +11,12 @@ import java.util.Map;
  * @author 小坤
  * @date 2022/02/22 13:16
  */
-@MetaKey(key = "enchantment")
 public class MetaEnchantment extends Meta {
 
     private final Map<Enchantment, Integer> enchantmentMap = new HashMap<>();
 
     public MetaEnchantment(ConfigurationSection root) {
         super(root);
-        enchantmentMap.clear();
         ConfigurationSection rootSection = root.getConfigurationSection("meta.enchantment");
         if (rootSection == null) return;
         rootSection.getKeys(false).forEach(key -> {

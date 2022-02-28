@@ -12,7 +12,6 @@ import java.util.List;
  * @author 小坤
  * @date 2022/02/23 23:28
  */
-@MetaKey(key = "data")
 public class MetaData extends Meta {
     private final List<Pair<String, Object>> data = new ArrayList<>();
 

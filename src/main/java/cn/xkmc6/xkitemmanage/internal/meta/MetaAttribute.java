@@ -16,14 +16,12 @@ import java.util.UUID;
  * @author 小坤
  * @date 2022/02/06 13:11
  */
-@MetaKey(key = "attribute")
 public class MetaAttribute extends Meta {
 
     private final Map<Slot, Map<Attributes, Object>> attribute = new HashMap<>();
 
     public MetaAttribute(ConfigurationSection root) {
         super(root);
-        attribute.clear();
         ConfigurationSection rootSection = root.getConfigurationSection("meta.attribute");
         if (rootSection == null) return;
         rootSection.getKeys(false).forEach(slot -> {

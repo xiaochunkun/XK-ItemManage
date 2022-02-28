@@ -31,7 +31,6 @@ dependencies {
     implementation("de.tr7zw:item-nbt-api:2.9.1")
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
     implementation("systems.manifold:manifold-ext-rt:2022.1.5")
-    implementation("com.github.seeseemelk:MockBukkit-v1.16:1.5.2")
 
     annotationProcessor(group: 'systems.manifold', name: 'manifold-ext', version: '2022.1.5')
     annotationProcessor("org.projectlombok:lombok:1.18.22")
@@ -39,6 +38,7 @@ dependencies {
     testCompileOnly("junit:junit:4.13.2")
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testCompileOnly("org.jetbrains:annotations:22.0.0")
+    testImplementation("com.github.seeseemelk:MockBukkit-v1.16:1.5.2")
     testCompileOnly(fileTree("libs"))
 }
 
@@ -75,7 +75,8 @@ shadowJar {
     relocate('de.tr7zw.changeme.nbtapi', 'cn.xkmc6.xkitemmanage.libs.nbtapi')
     relocate('com.cryptomorin.xseries', 'cn.xkmc6.xkitemmanage.libs.xseries')
     relocate('co.aikar.commands', 'cn.xkmc6.xkitemmanage.libs.acf')
-    relocate('co.aikar.locales', 'cn.xkmc6.xkitemmanage.lib.locales')
+    relocate('co.aikar.locales', 'cn.xkmc6.xkitemmanage.libs.locales')
+    relocate('manifold','cn.xkmc6.xkitemmanage.libs.manifold')
     exclude("LICENSE")
     exclude("META-INF/**")
     minimize()

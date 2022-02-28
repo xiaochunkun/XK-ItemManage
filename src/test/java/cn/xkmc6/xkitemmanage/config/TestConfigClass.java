@@ -3,6 +3,7 @@ package cn.xkmc6.xkitemmanage.config;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import cn.xkmc6.xkitemmanage.ItemManage;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.bukkit.scheduler.BukkitRunnable;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
@@ -31,7 +32,16 @@ public class TestConfigClass {
     @Test
     @DisplayName("测试config.yml")
     void verifyTestConfig() {
-        YamlConfiguration yml = ItemManage.getInstance().getConf().getYml();
+        new BukkitRunnable() {
+            @Override
+            public void run() {
+                testConfig();
+            }
+        }.runTaskLater(plugin,2L);
+    }
+
+    void testConfig(){
+        YamlConfiguration yml = ItemManage.getInstance().getConfigManage().getConfig().getYml();
         yml.getKeys(true).stream().filter(key -> yml.getConfigurationSection(key) == null).forEach(k -> {
                     Object result = yml.get(k);
                     System.out.println(result);

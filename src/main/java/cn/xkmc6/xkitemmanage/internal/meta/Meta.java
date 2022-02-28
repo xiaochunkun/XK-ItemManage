@@ -2,7 +2,12 @@ package cn.xkmc6.xkitemmanage.internal.meta;
 
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @author 小坤
@@ -11,23 +16,16 @@ import org.bukkit.inventory.ItemStack;
 public abstract class Meta {
     @Getter
     private final ConfigurationSection root;
-    @Getter
-    private final String id;
 
     public Meta(ConfigurationSection root) {
         this.root = root;
-        if (this.getClass().isAssignableFrom(MetaKey.class)){
-            this.id = this.getClass().getAnnotation(MetaKey.class).key();
-        }else {
-            this.id = this.getClass().getName();
-        }
     }
 
-    public ItemStack build(ItemStack itemStack){
+    public ItemStack build(ItemStack itemStack) {
         return itemStack;
     }
 
-    public ItemStack drop(ItemStack itemStack){
+    public ItemStack drop(ItemStack itemStack) {
         return itemStack;
     }
 }

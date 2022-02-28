@@ -15,7 +15,6 @@ import java.util.List;
  * @author 小坤
  * @date 2022/02/23 19:29
  */
-@MetaKey(key = "potion")
 public class MetaPotion extends Meta {
 
     private PotionData basePotion = null;

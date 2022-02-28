@@ -1,7 +1,7 @@
 package cn.xkmc6.xkitemmanage.config;
 
 import cn.xkmc6.xkitemmanage.ItemManage;
-import cn.xkmc6.xkitemmanage.internal.ItemData;
+import cn.xkmc6.xkitemmanage.internal.Display;
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -11,27 +11,25 @@ import java.util.*;
 
 /**
  * @author 小坤
- * @date 2022/02/06 11:19
+ * @date 2022/02/27 14:40
  */
-public class ItemConfig {
+public class DisplayConfig {
 
-    private final File file = new File(ItemManage.getInstance().getDataFolder(), "item");
+    private final File file = new File(ItemManage.getInstance().getDataFolder(), "display");
 
     @Getter
     private final List<File> fileList = new ArrayList<>();
     @Getter
-    private final Map<String, ItemData> itemMap = new HashMap<>();
+    private final Map<String, Display> displayMap = new HashMap<>();
 
     public void loadConfig() {
-        itemMap.clear();
+        displayMap.clear();
         if (!file.exists()) {
             file.mkdirs();
-            ItemManage.getInstance().saveResource("item/default.yml", true);
-            ItemManage.getInstance().saveResource("item/test/test.yml", true);
+            ItemManage.getInstance().saveResource("display/def.yml", true);
         }
         fileList.clear();
         find(file);
-
         fileList.stream().map(f -> {
             YamlConfiguration yml = YamlConfiguration.loadConfiguration(f);
             List<ConfigurationSection> list = new ArrayList<>();
@@ -39,16 +37,12 @@ public class ItemConfig {
                 if (yml.getConfigurationSection(key) != null) list.add(yml.getConfigurationSection(key));
             });
             return list;
-        }).forEach(list -> list.forEach(section -> itemMap.put(section.getName(),new ItemData(section))));
-
-        if (!ItemManage.getInstance().isUnitTest()){
-            itemMap.forEach((k,v) -> System.out.println(v.getItem()));
-        }
+        }).forEach(list -> list.forEach(section -> displayMap.put(section.getName(),new Display(section))));
     }
 
     private void find(File file) {
         File[] files = file.listFiles();
-        if (files != null){
+        if (files != null) {
             Arrays.stream(files).forEach(f -> {
                 if (f.isDirectory()) {
                     find(f);
@@ -59,5 +53,4 @@ public class ItemConfig {
             });
         }
     }
-
 }

@@ -1,4 +1,4 @@
-default:
+test:
   # 物品的display文件夹的节点
   display: 'DISPLAY_ITEM'
   # 物品的类型
@@ -45,5 +45,3 @@ default:
         second:
           third: "我就想NBT在这下面，怎么着？"
           fourth: 123
-  # 类型
-  type: 'item'

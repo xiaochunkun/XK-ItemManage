@@ -12,14 +12,12 @@ import java.util.List;
  * @author 小坤
  * @date 2022/02/23 13:13
  */
-@MetaKey(key = "itemflag")
 public class MetaItemFlag extends Meta{
 
     private final List<ItemFlag> flags = new ArrayList<>();
 
     public MetaItemFlag(ConfigurationSection root) {
         super(root);
-        flags.clear();
         ConfigurationSection rootSection = root.getConfigurationSection("meta.itemflag");
         if (rootSection == null) return;
         rootSection.getKeys(false).forEach(key -> {

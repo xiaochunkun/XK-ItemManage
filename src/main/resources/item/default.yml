@@ -50,5 +50,3 @@ default:
         second:
           third: "我就想NBT在这下面，怎么着？"
           fourth: 123
-  # 类型
-  type: 'item'

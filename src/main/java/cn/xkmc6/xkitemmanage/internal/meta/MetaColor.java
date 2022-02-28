@@ -11,7 +11,6 @@ import org.bukkit.inventory.meta.PotionMeta;
  * @author 小坤
  * @date 2022/02/23 20:15
  */
-@MetaKey(key = "color")
 public class MetaColor extends Meta {
     private final Color color;
 

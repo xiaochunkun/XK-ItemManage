@@ -10,7 +10,6 @@ import org.bukkit.inventory.meta.ItemMeta;
  * @author 小坤
  * @date 2022/02/23 20:10
  */
-@MetaKey(key = "shiny")
 public class MetaShiny extends Meta {
     private final boolean shiny;
 

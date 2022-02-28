@@ -3,3 +3,5 @@ DISPLAY_ITEM:
   lore:
     - '&9<TYPE>'
     - '&f<LORE...>'
+  meta:
+    shiny: true

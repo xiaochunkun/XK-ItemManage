@@ -3,6 +3,7 @@ package cn.xkmc6.xkitemmanage;
 import be.seeseemelk.mockbukkit.MockBukkit;
 import be.seeseemelk.mockbukkit.ServerMock;
 import be.seeseemelk.mockbukkit.entity.PlayerMock;
+import cn.xkmc6.xkitemmanage.internal.meta.Meta;
 import net.minecraft.server.v1_16_R3.DamageSource;
 import net.minecraft.server.v1_16_R3.EntityHuman;
 import net.minecraft.server.v1_16_R3.EntityPlayer;
@@ -43,8 +44,10 @@ public class TestPluginClass {
     @Test
     @DisplayName("Verify that we are in a UNIT_TEST environment")
     void verifyTestEnvironment() {
-        ItemManage.get();
+        "b".print();
+        System.out.println("a".asXMaterial());
+        System.out.println("Water".asXMaterial());
+        System.out.println("Water".asMaterial());
     }
-
 
 }

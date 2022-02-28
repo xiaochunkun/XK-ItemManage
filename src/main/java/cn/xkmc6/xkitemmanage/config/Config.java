@@ -24,14 +24,14 @@ public class Config {
     public void loadConfig() {
         if (!file.exists()) {
             ItemManage.getInstance().saveDefaultConfig();
-            ItemManage.getInstance().getLogger().info("§a保存默认配置");
+            "§a保存默认配置".print();
         }
         try {
             yml.load(file);
-            ItemManage.getInstance().getLogger().info("§a读取 config.yml 成功");
+            "§a读取 config.yml 成功".print();
         } catch (IOException | InvalidConfigurationException e) {
             e.printStackTrace();
-            ItemManage.getInstance().getLogger().warning("§a读取 config.yml 时发生错误");
+            "§a读取 config.yml 时发生错误".print();
         }
     }
 }
