@@ -16,5 +16,6 @@ public class Display {
 
     public Display(ConfigurationSection root) {
         root.getKeys(false).forEach(key -> display.put(key, root.get(key)));
+        display.put("root", root);
     }
 }

@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  */
 public class ItemData {
     @Getter
-    private Display display = null;
+    private String display = null;
     @Getter
     private XMaterial material = XMaterial.AIR;
     @Getter
@@ -40,7 +40,7 @@ public class ItemData {
         root.getKeys(false).stream().filter(key -> root.get(key) != null).forEach(key -> {
             switch (key) {
                 case "display":
-                    this.display = root.getString("display", "null").asDisplay();
+                    this.display = root.getString("display", "null");
                     break;
                 case "material":
                     this.material = root.getString("material", "air").asXMaterial();
@@ -100,7 +100,7 @@ public class ItemData {
         if (display == null) return itemStack;
         ItemMeta itemMeta = itemStack.getItemMeta();
         if (itemMeta == null) return itemStack;
-        String disName = (String) display.getDisplay().get("name");
+        String disName = (String) display.asDisplay().getDisplay().get("name");
         List<String> nameKeys = disName.asNameKey();
         for (String key : nameKeys) {
             if (name.containsKey(key)) {
@@ -108,7 +108,7 @@ public class ItemData {
             }
         }
         itemMeta.setDisplayName(disName.replaceAll("&", "§"));
-        List<String> loreName = display.getDisplay().get("lore").castList(String.class);
+        List<String> loreName = display.asDisplay().getDisplay().get("lore").castList(String.class);
         List<Pair<String, Boolean>> loreKeys = loreName.asLoreKeys();
         loreName.clear();
         for (Pair<String, Boolean> pair : loreKeys) {
@@ -133,14 +133,36 @@ public class ItemData {
         for (Meta meta : metas) {
             itemStack = meta.build(itemStack);
         }
-        if (display.getDisplay().containsKey("meta")){
-            ConfigurationSection section = (ConfigurationSection) display.getDisplay().get("meta");
-            section.getKeys(false).forEach(key -> {
-
-            });
+        if (display.asDisplay().getDisplay().containsKey("meta")){
+            ConfigurationSection root = (ConfigurationSection) display.asDisplay().getDisplay().get("root");
+            ConfigurationSection section = (ConfigurationSection) display.asDisplay().getDisplay().get("meta");
+            if (section != null) {
+                section.getKeys(false).forEach(k -> {
+                    ClassManage classManage = ItemManage.getInstance().getClassManage();
+                    if (classManage.getClasses().containsKey(k)) {
+                        Class<? extends Meta> meta = classManage.getClasses().get(k);
+                        try {
+                            Constructor<? extends Meta> constructor = meta.getConstructor(ConfigurationSection.class);
+                            Meta o = constructor.newInstance(root);
+                            metas.add(o);
+                        } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                });
+            }
         }
-        if (display.getDisplay().containsKey("data")){
-
+        if (display.asDisplay().getDisplay().containsKey("data")){
+            ConfigurationSection root = (ConfigurationSection) display.asDisplay().getDisplay().get("root");
+            ClassManage classManage = ItemManage.getInstance().getClassManage();
+            Class<? extends Meta> meta = classManage.getClasses().get("data");
+            try {
+                Constructor<? extends Meta> constructor = meta.getConstructor(ConfigurationSection.class);
+                Meta o = constructor.newInstance(root);
+                metas.add(o);
+            } catch (NoSuchMethodException | InvocationTargetException | InstantiationException | IllegalAccessException e) {
+                e.printStackTrace();
+            }
         }
         return itemStack;
     }
