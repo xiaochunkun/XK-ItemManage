@@ -63,4 +63,12 @@ public class CommandHandler extends BaseCommand {
         ItemStack itemStack = player.getItemInHand();
         itemStack.showItemStack(player);
     }
+
+    @Subcommand("reload")
+    @CommandPermission("xkitemmanage.reload")
+    @Description("重载配置文件")
+    public void reload(CommandSender sender){
+        ItemManage.getInstance().getConfigManage().registerConfig();
+        sender.sendMessage("§a重载完成！");
+    }
 }
