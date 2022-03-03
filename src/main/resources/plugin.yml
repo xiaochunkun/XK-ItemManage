@@ -4,3 +4,4 @@ main: cn.xkmc6.xkitemmanage.ItemManage
 api-version: 1.15
 softdepend: [ MythicMobs ]
 authors: [ XiaoKun ]
+

@@ -5,6 +5,7 @@ import cn.xkmc6.xkitemmanage.internal.Display;
 import cn.xkmc6.xkitemmanage.internal.meta.Meta;
 import cn.xkmc6.xkitemmanage.manage.ClassManage;
 import com.cryptomorin.xseries.XMaterial;
+import de.tr7zw.changeme.nbtapi.NBTItem;
 import javafx.util.Pair;
 import lombok.Getter;
 import org.bukkit.Material;
@@ -25,6 +26,8 @@ import java.util.stream.Collectors;
  * @date 2022/02/27 13:09
  */
 public class ItemData {
+    private ConfigurationSection root;
+
     @Getter
     private String display = null;
     @Getter
@@ -37,7 +40,8 @@ public class ItemData {
     private List<Meta> metas = new ArrayList<>();
 
     public ItemData(ConfigurationSection root) {
-        root.getKeys(false).stream().filter(key -> root.get(key) != null).forEach(key -> {
+        this.root = root;
+        this.root.getKeys(false).stream().filter(key -> root.get(key) != null).forEach(key -> {
             switch (key) {
                 case "display":
                     this.display = root.getString("display", "null");
@@ -127,13 +131,13 @@ public class ItemData {
                 }
             }
         }
-        loreName = loreName.stream().map(l -> l.replaceAll("&","§")).collect(Collectors.toList());
+        loreName = loreName.stream().map(l -> l.replaceAll("&", "§")).collect(Collectors.toList());
         itemMeta.setLore(loreName);
         itemStack.setItemMeta(itemMeta);
         for (Meta meta : metas) {
             itemStack = meta.build(itemStack);
         }
-        if (display.asDisplay().getDisplay().containsKey("meta")){
+        if (display.asDisplay().getDisplay().containsKey("meta")) {
             ConfigurationSection root = (ConfigurationSection) display.asDisplay().getDisplay().get("root");
             ConfigurationSection section = (ConfigurationSection) display.asDisplay().getDisplay().get("meta");
             if (section != null) {
@@ -152,7 +156,7 @@ public class ItemData {
                 });
             }
         }
-        if (display.asDisplay().getDisplay().containsKey("data")){
+        if (display.asDisplay().getDisplay().containsKey("data")) {
             ConfigurationSection root = (ConfigurationSection) display.asDisplay().getDisplay().get("root");
             ClassManage classManage = ItemManage.getInstance().getClassManage();
             Class<? extends Meta> meta = classManage.getClasses().get("data");
@@ -164,7 +168,9 @@ public class ItemData {
                 e.printStackTrace();
             }
         }
-        return itemStack;
+        NBTItem item = new NBTItem(itemStack);
+        item.setString("xk_item_manage_key", root.getName());
+        return item.getItem();
     }
 
     @Override
