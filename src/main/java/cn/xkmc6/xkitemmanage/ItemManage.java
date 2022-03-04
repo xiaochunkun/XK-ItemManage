@@ -6,8 +6,6 @@ import cn.xkmc6.xkitemmanage.manage.ClassManage;
 import cn.xkmc6.xkitemmanage.manage.ConfigManage;
 import co.aikar.commands.InvalidCommandArgument;
 import co.aikar.commands.PaperCommandManager;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMultiset;
 import lombok.Getter;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -16,7 +14,6 @@ import org.bukkit.plugin.java.JavaPluginLoader;
 import javax.annotation.ParametersAreNonnullByDefault;
 import java.io.File;
 import java.util.Locale;
-import java.util.stream.Collectors;
 
 /**
  * @author 小坤
@@ -75,9 +72,7 @@ public final class ItemManage extends JavaPlugin {
 
     private void registerCommand(){
         commandManager = new PaperCommandManager(this);
-        commandManager.getCommandCompletions().registerCompletion("itemData", c -> {
-            return this.getConfigManage().getItemConfig().getItemMap().keySet();
-        });
+        commandManager.getCommandCompletions().registerCompletion("itemData", c -> this.getConfigManage().getItemConfig().getItemMap().keySet());
         commandManager.getCommandContexts().registerContext(ItemData.class, c -> {
             ItemData itemData = c.popFirstArg().asItemData();
             if (itemData == null) {

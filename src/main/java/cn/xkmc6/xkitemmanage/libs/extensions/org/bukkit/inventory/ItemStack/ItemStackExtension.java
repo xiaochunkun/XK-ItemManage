@@ -5,7 +5,6 @@ import cn.xkmc6.xkitemmanage.internal.ItemData;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
-import net.md_5.bungee.chat.ComponentSerializer;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 

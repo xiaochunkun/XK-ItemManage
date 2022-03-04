@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
  * @date 2022/02/27 13:09
  */
 public class ItemData {
-    private ConfigurationSection root;
+    private final ConfigurationSection root;
 
     @Getter
     private String display = null;

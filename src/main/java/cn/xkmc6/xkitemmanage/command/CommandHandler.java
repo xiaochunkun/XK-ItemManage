@@ -67,7 +67,7 @@ public class CommandHandler extends BaseCommand {
     @Subcommand("reload")
     @CommandPermission("xkitemmanage.reload")
     @Description("重载配置文件")
-    public void reload(CommandSender sender){
+    public void doReload(CommandSender sender){
         ItemManage.getInstance().getConfigManage().registerConfig();
         sender.sendMessage("§a重载完成！");
     }

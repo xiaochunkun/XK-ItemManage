@@ -44,10 +44,7 @@ public class TestPluginClass {
     @Test
     @DisplayName("Verify that we are in a UNIT_TEST environment")
     void verifyTestEnvironment() {
-        "b".print();
-        System.out.println("a".asXMaterial());
-        System.out.println("Water".asXMaterial());
-        System.out.println("Water".asMaterial());
+
     }
 
 }
