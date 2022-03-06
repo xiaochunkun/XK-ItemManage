@@ -13,6 +13,7 @@ repositories {
     maven { url = "https://repo.aikar.co/content/groups/aikar/" }
     maven { url = "https://oss.sonatype.org/content/repositories/snapshots/" }
     maven { url = "https://hub.spigotmc.org/nexus/content/repositories/public/" }
+    maven{ url = "https://repo.incendo.org/content/repositories/snapshots/"}
 }
 
 configurations {
@@ -31,6 +32,7 @@ dependencies {
     implementation("de.tr7zw:item-nbt-api:2.9.1")
     implementation("co.aikar:acf-paper:0.5.1-SNAPSHOT")
     implementation("systems.manifold:manifold-ext-rt:2022.1.5")
+    implementation("cloud.commandframework:cloud-PLATFORM:1.6.2")
 
     annotationProcessor(group: 'systems.manifold', name: 'manifold-ext', version: '2022.1.5')
     annotationProcessor("org.projectlombok:lombok:1.18.22")
@@ -39,6 +41,7 @@ dependencies {
     testCompileOnly("org.junit.jupiter:junit-jupiter-api:5.8.2")
     testCompileOnly("org.jetbrains:annotations:22.0.0")
     testImplementation("com.github.seeseemelk:MockBukkit-v1.16:1.5.2")
+    testImplementation("cloud.commandframework:cloud-PLATFORM:1.6.2")
     testCompileOnly(fileTree("libs"))
 }
 
