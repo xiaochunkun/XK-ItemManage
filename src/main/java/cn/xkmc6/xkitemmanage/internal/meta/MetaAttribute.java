@@ -4,6 +4,7 @@ import de.tr7zw.changeme.nbtapi.NBTCompoundList;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import de.tr7zw.changeme.nbtapi.NBTListCompound;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.util.NumberConversions;
 
@@ -33,6 +34,13 @@ public class MetaAttribute extends Meta {
             });
             attribute.put(slot.asSlot(), map);
         });
+    }
+
+    @Override
+    public YamlConfiguration save() {
+        YamlConfiguration yml = new YamlConfiguration();
+        attribute.forEach((k,v) -> v.forEach((key,value) -> yml.set(k.getSlot() +"."+key.getAttributeName(),value)));
+        return yml;
     }
 
     @Override

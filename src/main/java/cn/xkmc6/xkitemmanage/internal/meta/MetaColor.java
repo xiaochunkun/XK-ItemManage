@@ -2,6 +2,7 @@ package cn.xkmc6.xkitemmanage.internal.meta;
 
 import org.bukkit.Color;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -17,11 +18,20 @@ public class MetaColor extends Meta {
     public MetaColor(ConfigurationSection root) {
         super(root);
         String s = root.getString("meta.color");
-        if (s == null || s.split("-").length < 3) {
+        if (s == null || s.split("-").length == 2) {
             color = null;
+        } else if (s.split("-").length == 1){
+            color = Color.fromBGR(s.asInt());
         } else {
             color = Color.fromBGR(s.split("-")[0].asInt(), s.split("-")[1].asInt(), s.split("-")[2].asInt());
         }
+    }
+
+    @Override
+    public YamlConfiguration save() {
+        YamlConfiguration yml = new YamlConfiguration();
+        yml.set("color",color.asBGR());
+        return yml;
     }
 
     @Override

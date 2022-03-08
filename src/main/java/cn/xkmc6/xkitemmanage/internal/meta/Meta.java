@@ -28,4 +28,8 @@ public abstract class Meta {
     public ItemStack drop(ItemStack itemStack) {
         return itemStack;
     }
+
+    public YamlConfiguration save() {
+        return new YamlConfiguration();
+    }
 }

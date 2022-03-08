@@ -5,6 +5,7 @@ import cn.xkmc6.xkitemmanage.internal.ItemData;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import manifold.ext.rt.api.Extension;
 import manifold.ext.rt.api.This;
+import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 
@@ -39,4 +40,5 @@ public class ItemStackExtension {
             player.sendMessage("§4该物品无NBT");
         }
     }
+
 }

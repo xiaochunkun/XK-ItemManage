@@ -40,10 +40,6 @@ public class ItemConfig {
             });
             return list;
         }).forEach(list -> list.forEach(section -> itemMap.put(section.getName(),new ItemData(section))));
-
-        if (!ItemManage.getInstance().isUnitTest()){
-            itemMap.forEach((k,v) -> System.out.println(v.getItem()));
-        }
     }
 
     private void find(File file) {

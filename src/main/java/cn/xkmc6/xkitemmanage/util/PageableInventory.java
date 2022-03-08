@@ -11,7 +11,6 @@ import org.jetbrains.annotations.NotNull;
 import java.util.List;
 
 /**
- *
  * 可分页的Inventory
  * <p>
  * 我强烈建议你可以通过继承该类的方式进行编写
@@ -55,9 +54,9 @@ public class PageableInventory implements InventoryHolder {
      * @param itemsPerPage 每页显示数量, 默认为 45
      */
     public PageableInventory(int size, String title, List<ItemStack> items, int page, int itemsPerPage) {
-        this.inventory = Bukkit.createInventory(this, size, title.replaceAll("&", "§"));
-        this.items = items;
         this.page = page;
+        this.inventory = Bukkit.createInventory(this, size, String.format(title.replaceAll("&", "§"), page));
+        this.items = items;
         this.itemsPerPage = itemsPerPage;
         build();
     }
@@ -155,7 +154,7 @@ public class PageableInventory implements InventoryHolder {
         return inventory;
     }
 
-    private boolean isAir(ItemStack itemStack){
+    private boolean isAir(ItemStack itemStack) {
         return itemStack == null || itemStack.getType().equals(Material.AIR);
     }
 }

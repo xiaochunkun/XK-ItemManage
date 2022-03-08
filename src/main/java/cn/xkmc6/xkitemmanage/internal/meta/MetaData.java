@@ -3,6 +3,7 @@ package cn.xkmc6.xkitemmanage.internal.meta;
 import de.tr7zw.changeme.nbtapi.NBTItem;
 import javafx.util.Pair;
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -34,5 +35,12 @@ public class MetaData extends Meta {
         NBTItem nbtItem = new NBTItem(itemStack);
         nbtItem.removeKey("xkitem");
         return nbtItem.getItem();
+    }
+
+    @Override
+    public YamlConfiguration save() {
+        YamlConfiguration yml = new YamlConfiguration();
+        data.forEach(pair -> yml.set(pair.getKey(),pair.getValue()));
+        return yml;
     }
 }
