@@ -1,6 +1,7 @@
 package cn.xkmc6.xkitemmanage.internal.meta;
 
 import org.bukkit.configuration.ConfigurationSection;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.inventory.ItemStack;
 
@@ -37,6 +38,15 @@ public class MetaEnchantment extends Meta {
     public ItemStack drop(ItemStack itemStack) {
         itemStack.getEnchantments().forEach((k, v) -> itemStack.removeEnchantment(k));
         return itemStack;
+    }
+
+    @Override
+    public YamlConfiguration save() {
+        YamlConfiguration yml = new YamlConfiguration();
+        enchantmentMap.forEach((k,v) -> {
+          yml.set(k.getName(),v);
+        });
+        return yml;
     }
 
     @Override
