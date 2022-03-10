@@ -40,7 +40,7 @@ public class MetaData extends Meta {
     @Override
     public YamlConfiguration save() {
         YamlConfiguration yml = new YamlConfiguration();
-        data.forEach(pair -> yml.set(pair.getKey(),pair.getValue()));
+        data.forEach(pair -> yml.set("data." + pair.getKey(),pair.getValue()));
         return yml;
     }
 }

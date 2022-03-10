@@ -44,7 +44,7 @@ public class MetaEnchantment extends Meta {
     public YamlConfiguration save() {
         YamlConfiguration yml = new YamlConfiguration();
         enchantmentMap.forEach((k,v) -> {
-          yml.set(k.getName(),v);
+          yml.set("enchantment."+ k.getName(),v);
         });
         return yml;
     }

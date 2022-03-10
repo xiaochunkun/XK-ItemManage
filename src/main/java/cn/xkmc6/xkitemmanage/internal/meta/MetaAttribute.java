@@ -39,7 +39,7 @@ public class MetaAttribute extends Meta {
     @Override
     public YamlConfiguration save() {
         YamlConfiguration yml = new YamlConfiguration();
-        attribute.forEach((k,v) -> v.forEach((key,value) -> yml.set(k.getSlot() +"."+key.getAttributeName(),value)));
+        attribute.forEach((k, v) -> v.forEach((key, value) -> yml.set("attribute." + k.getSlot() + "." + key.getAttributeName(), value)));
         return yml;
     }
 
